@@ -2,7 +2,7 @@
 <html>
 <head>
 <style>
-#myVideo {
+#video {
   position: fixed;
   right: 0;
   bottom: 0;
@@ -17,14 +17,39 @@
   min-width: 100%;
   min-height: 100%;
 }
+
+/* Make the button cover the whole screen */
+#playBtn {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  font-size: 2.5rem;
+  z-index: 1000;
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
 </style>
 </head>
 <body>
 
-<iframe src="video" type="video/mp4" allow="autoplay" id="video" style="display:none"></iframe>
-<video autoplay muted loop  id="myVideo2">
+<button id="playBtn"></button>
+<video loop id="myVideo2" style="display:none;">
   <source src="video2.mp4" type="video/mp4">
 </video>
+<script>
+document.getElementById('playBtn').onclick = function() {
+  var vid = document.getElementById('myVideo2');
+  vid.style.display = 'block';
+  vid.muted = false;
+  vid.autoplay = true;
+  vid.play();
+  this.style.display = 'none';
+};
+</script>
 
 </body>
 </html>
