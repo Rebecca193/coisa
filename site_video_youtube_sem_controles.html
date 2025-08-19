@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vídeo em reprodução contínua</title>
+  <style>
+    html, body { height: 100%; margin: 0; background: #000; overflow: hidden; }
+    .wrap { position: fixed; inset: 0; }
+    video { width: 100%; height: 100%; object-fit: contain; display: block; background: #000; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- Use um arquivo local de vídeo -->
+    <video id="vid" autoplay muted loop playsinline disablePictureInPicture controlslist="nodownload nofullscreen noremoteplayback">
+      <source src="video.mp4" type="video/mp4" />
+      Seu navegador não suporta a tag de vídeo.
+    </video>
+  </div>
+
+  <script>
+    const vid = document.getElementById('vid');
+    vid.removeAttribute('controls');
+
+    // Bloqueia teclas comuns de pausa (Espaço, K)
+    const blockKeys = new Set([' ', 'k', 'K', 'MediaPlayPause', 'Space']);
+    window.addEventListener('keydown', (e) => {
+      if (blockKeys.has(e.key)) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+
+    // Desativa o menu de contexto (clique direito)
+    window.addEventListener('contextmenu', (e) => e.preventDefault(), true);
+  </script>
+
+  <noscript>Ative o JavaScript para reprodução automática.</noscript>
+</body>
+</html>
